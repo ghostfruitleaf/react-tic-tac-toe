@@ -6,6 +6,10 @@ import Board from './components/Board';
 const PLAYER_1 = 'X';
 const PLAYER_2 = 'O';
 
+// [[->{data}<-,{data},{data}],[{data},{data},{data}],[{data},{data},{data}]]
+
+
+//[<Square/>, <Square/>, <Square/>, <Square/>, .... , <Square/>] 
 const generateSquares = () => {
   const squares = [];
 

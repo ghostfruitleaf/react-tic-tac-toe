@@ -35,6 +35,21 @@ const App = () => {
   //squares = [[{id: 0, value: ''},{id: 1, value: ''},{id: 2, value: ''}],[{...},{...},{...}],[{...},{...},{...}]]
   // squares[0][1]
   const updateSquare = (id) => {
+    // search squares until you find a matching id 
+    // update only the field you need 
+    // --> update field: 
+    // check if square blank !squares[row][col].value
+    // if a square is blank: 
+    //    if current player uses X = !currentSquare (AKA currentSquare == false) -> update with X
+
+    // boolean variable = this 
+    // this == false --> !this
+    // this == true --> this 
+
+    //    else if current player uses O = currentSquare ->  update with O
+    //    change current player -> setCurrentSquare(!currentSquare)
+    // create a copy of squares with the updated square
+    // setSquares w/ new copy 
     let newSquares = []; 
 
     for (let row = 0; row < 3; row += 1) {
@@ -55,21 +70,6 @@ const App = () => {
     }
 
     setSquares(newSquares);
-    // search squares until you find a matching id 
-    // update only the field you need 
-    // --> update field: 
-    // check if square blank !squares[row][col].value
-    // if a square is blank: 
-    //    if current player uses X = !currentSquare (AKA currentSquare == false) -> update with X
-
-    // boolean variable = this 
-    // this == false --> !this
-    // this == true --> this 
-
-    //    else if current player uses O = currentSquare ->  update with O
-    //    change current player -> setCurrentSquare(!currentSquare)
-    // create a copy of squares with the updated square
-    // setSquares w/ new copy 
   }
 
   
@@ -80,6 +80,31 @@ const App = () => {
 
 
   const checkForWinner = () => {
+
+    const winnerX = ['x','x','x'];
+    const winnerO = ['o','o','o']
+    // [0][0][0][1][0][2], 
+    // [1][0][1][1][1][2]
+    // [2][0][2][1][2][2]
+
+    // [[1, 2, 3][4, 5, 6][7, 8, 9]]
+    const [first, second, third] = squares;
+    const singleArraySquare = [...first, ...second, ...third]
+    const valueSquares = singleArraySquare.map((square) => console.log(square) )
+    console.log(valueSquares);
+    // diagonal
+    if (squares[0][0].value === squares[1][1].value && squares[2][2].value === squares[0][0].value) {
+      if(squares[0][0].value){
+        return squares[0][0].value === 'x'  ? 'x' : 'o'
+      }
+    }
+    // const arrays = [...first, ...second, ...third]
+    
+
+    //diagonals: 
+    // squares[0][0] squares[1][1] squares [2][2]
+    // squares[0][2] squares[1][1] squares [2][0]
+    
     // Complete in Wave 3
     // You will need to:
     // 1. Go accross each row to see if 
@@ -100,7 +125,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
+        <h2>The winner is {checkForWinner()}</h2>
         <button>Reset Game</button>
       </header>
       <main>

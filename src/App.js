@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './App.css';
-
 import Board from './components/Board';
 
 const PLAYER_1 = 'X';
@@ -8,8 +7,6 @@ const PLAYER_2 = 'O';
 
 // [[->{data}<-,{data},{data}],[{data},{data},{data}],[{data},{data},{data}]]
 
-
-//[<Square/>, <Square/>, <Square/>, <Square/>, .... , <Square/>] 
 const generateSquares = () => {
   const squares = [];
 
@@ -34,7 +31,22 @@ const App = () => {
   // This starts state off as a 2D array of JS objects with
   // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
+  const [currentSquare, setCurrentSquare] = useState(false);
 
+  const updateSquare = (id) => {
+    // search squares until you find a matching id 
+    // update only the field you need 
+    // --> update field: 
+    // check if square blank 
+    // if a square is blank: 
+    //    if current player uses X , update with X
+    //    else if current player uses O, update with O
+    //    change current player 
+    // create a copy of squares with the updated square
+    // setSquares w/ new copy 
+  }
+
+  
   // Wave 2
   // You will need to create a method to change the square 
   //   When it is clicked on.
@@ -66,7 +78,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={squares} onClickCallback={updateSquare}/>
       </main>
     </div>
   );

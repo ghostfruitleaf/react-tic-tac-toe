@@ -8,7 +8,7 @@ const Square = (props) => {
   //  Component to alert a parent 
   //  component when it's clicked on.
   const updatedSquare = () => {
-    props.onClickCallback(props.id);
+    props.onClickCallback(props.id); // id is id we passed in for the square component 
   };
 
   return <button

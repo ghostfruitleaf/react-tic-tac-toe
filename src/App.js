@@ -81,39 +81,36 @@ const App = () => {
 
   const checkForWinner = () => {
 
-    const winnerX = ['x','x','x'];
-    const winnerO = ['o','o','o']
-    // [0][0][0][1][0][2], 
-    // [1][0][1][1][1][2]
-    // [2][0][2][1][2][2]
+    // const ALL_X = ['x','x','x'];
+    // const ALL_O = ['o','o','o'];
+    
+    const WINNING_INDEX = [
+      [[0, 0], [0, 1], [0, 2]], 
+      [[1, 0], [1, 1], [1, 2]],
+      [[2, 0], [2, 1], [2, 2]],
+      [[0, 0], [1, 0], [2, 0]],
+      [[0, 1], [1, 1], [2, 1]],
+      [[0, 2], [1, 2], [2, 2]],
+      [[0, 0], [1, 1], [2, 2]],
+      [[0, 2], [1, 1], [2, 0]]
+    ];
 
-    // [[1, 2, 3][4, 5, 6][7, 8, 9]]
-    const [first, second, third] = squares;
-    const singleArraySquare = [...first, ...second, ...third]
-    const valueSquares = singleArraySquare.map((square) => console.log(square) )
-    console.log(valueSquares);
-    // diagonal
-    if (squares[0][0].value === squares[1][1].value && squares[2][2].value === squares[0][0].value) {
-      if(squares[0][0].value){
-        return squares[0][0].value === 'x'  ? 'x' : 'o'
+    let hasBlank = false; 
+
+    for (const winSet of WINNING_INDEX) {
+      
+      const row = []
+      for (const winPos of winSet) {
+        const [x, y] = winPos;
+        if(){
+          
+        }
+        row.push(squares[x][y].value);
+      }
+      if(row[0] === row[1] && row[1] === row[2] && row[0]){
+        return row[0] === 'x' ? 'x' : 'o';
       }
     }
-    // const arrays = [...first, ...second, ...third]
-    
-
-    //diagonals: 
-    // squares[0][0] squares[1][1] squares [2][2]
-    // squares[0][2] squares[1][1] squares [2][0]
-    
-    // Complete in Wave 3
-    // You will need to:
-    // 1. Go accross each row to see if 
-    //    3 squares in the same row match
-    //    i.e. same value
-    // 2. Go down each column to see if
-    //    3 squares in each column match
-    // 3. Go across each diagonal to see if 
-    //    all three squares have the same value.
 
   }
 

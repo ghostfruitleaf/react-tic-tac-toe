@@ -112,7 +112,7 @@ const App = () => {
   }
 
   const resetGame = () => {
-    // Complete in Wave 4
+    setSquares(generateSquares());
   }
 
   return (

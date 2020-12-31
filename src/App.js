@@ -102,8 +102,8 @@ const App = () => {
       const row = []
       for (const winPos of winSet) {
         const [x, y] = winPos;
-        if(){
-          
+        if(!squares[x][y].value){
+          hasBlank = true;
         }
         row.push(squares[x][y].value);
       }
@@ -111,6 +111,8 @@ const App = () => {
         return row[0] === 'x' ? 'x' : 'o';
       }
     }
+
+    return hasBlank ? 'IN-PROGRESS' : 'TIED';
 
   }
 

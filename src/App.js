@@ -31,25 +31,8 @@ const App = () => {
   const [squares, setSquares] = useState(generateSquares());
   const [currentSquare, setCurrentSquare] = useState(false); // false = X 
 
-
-  //squares = [[{id: 0, value: ''},{id: 1, value: ''},{id: 2, value: ''}],[{...},{...},{...}],[{...},{...},{...}]]
-  // squares[0][1]
   const updateSquare = (id) => {
-    // search squares until you find a matching id 
-    // update only the field you need 
-    // --> update field: 
-    // check if square blank !squares[row][col].value
-    // if a square is blank: 
-    //    if current player uses X = !currentSquare (AKA currentSquare == false) -> update with X
-
-    // boolean variable = this 
-    // this == false --> !this
-    // this == true --> this 
-
-    //    else if current player uses O = currentSquare ->  update with O
-    //    change current player -> setCurrentSquare(!currentSquare)
-    // create a copy of squares with the updated square
-    // setSquares w/ new copy 
+  
     let newSquares = []; 
 
     for (let row = 0; row < 3; row += 1) {
@@ -57,12 +40,12 @@ const App = () => {
       for (let col = 0; col < 3; col += 1) {
         if (id === squares[row][col].id) {
           if (!squares[row][col].value) {
-            if (!currentSquare) { // currentSquare == false ! => false == 
+            if (!currentSquare) {
               squares[row][col].value = PLAYER_1; 
-            } else { // currentSquare, currentSquare == true
+            } else { 
               squares[row][col].value = PLAYER_2; 
             }
-            setCurrentSquare(!currentSquare);//set to the next player turn
+            setCurrentSquare(!currentSquare);
           }
         } 
         newSquares[row].push(squares[row][col])
@@ -72,10 +55,6 @@ const App = () => {
     setSquares(newSquares);
   }
 
-  // Wave 2
-  // You will need to create a method to change the square 
-  //  When it is clicked on.
-  //  Then pass it into the squares as a callback
 
   const checkForWinner = () => {
 

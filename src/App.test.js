@@ -85,7 +85,7 @@ describe('App', () => {
 });
 
   
-  describe.skip('Wave 3:  Winner tests', () => {
+  describe('Wave 3:  Winner tests', () => {
     describe('Prints "Winner is x" when x wins', () => {
       test('that a winner will be identified when 3 Xs get in a row across the top', () => {
         // Arrange

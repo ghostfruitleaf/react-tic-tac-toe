@@ -58,7 +58,10 @@ import Board from './components/Board';
 //   setSquares from const[squares, setSquares] is the function you use to 
 //   tell your app to re-render (cook a new batch of your recipe), and it updates
 //   your app to re-render with the new squares in your Board component (aka 
-//   cook a new batch of your recipe with a variation)
+//   cook a new batch of your recipe with a variation). 
+//
+//   this is why setSquares has to regenerate the ENTIRE board, instead of just 
+//   needing to update the square that changed
 //
 //   hopefully this analogy helps someone out with understanding state in React!
 //   if i can remember to do it, i'd like to turn this into a medium article, which 

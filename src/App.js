@@ -127,10 +127,31 @@ const generateSquares = () => {
 // THE APP FUNCTION ITSELF 
 // where the app maintains its state and figures out what to render
 const App = () => {
-
-  // This starts state off as a 2D array of JS objects with
-  // empty value and unique ids.
+  // the line below takes a variable, "squares", that represents the 3x3
+  // grid of squares the Board component will use to check who has selected 
+  // what square. 
+  //
+  // "setSquares" defines the function that will take the current
+  // value of the squares variable and update the app's state. 
+  //
+  // "useState" informs
+  // that the initial state of squares will come from the output of 
+  // generateSquares()
   const [squares, setSquares] = useState(generateSquares());
+  // the line below takes a variable, "currentSquare", that represents the 
+  // current player ('x' or 'o') -- this variable could have been named a lot
+  // better. that is to say, it will inform whether the next square clicked will
+  // be 'x' or 'o'
+  //
+  // "setCurrentSquare" defines the function that will change the currentSquare
+  // to represent the next player AFTER the current player has chosen their 
+  // square
+  // 
+  // "useState" informs
+  // that the initial state of currentSquare will be "false", and that "false"
+  // will represent "x", while "true" will represent "o"
+  // ^^^ while it makes this easier, i think we could have not used a boolean 
+  // to make this clearer
   const [currentSquare, setCurrentSquare] = useState(false); // false = X 
 
   const updateSquare = (id) => {

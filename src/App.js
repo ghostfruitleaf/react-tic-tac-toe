@@ -18,6 +18,10 @@ import Board from './components/Board';
 //
 // * as such, the components are the ingredients. 
 //
+//   just like each ingredient has its own variant (ex. using elbow pasta or 
+//   spiral pasta for a mac and cheese recipe), each component has their own 
+//   "props", whose values are stored in the app state. 
+//
 // * think of rendering your app like cooking your dish. you may follow the 
 //   recipe to the tee, you may swap an ingredient or two, you may add some more 
 //   of an ingredient or take something out. but more or less it will 
@@ -43,10 +47,22 @@ import Board from './components/Board';
 //   const [squares, setSquares] = useState(generateSquares());
 //
 //   useState(generateSquares) informs your app that the first time you render/
-//   cook your dish, the 'squares' from const [squares, setSquares], which tells 
-//   what "kind" of squares you will send into your Board component: 
+//   cook your dish, the 'squares' from const [squares, setSquares], will come 
+//   from the output of generateSquares().
+//   
+//   in turn, squares will tell your App what "kind" of squares you will send 
+//   into your Board component: 
 // 
-//   <Board squares={squares} onClickCallback={checkForWinner() ? () => {} : updateSquare}/> 
+//   <Board squares={squares} onClickCallback={checkForWinner() ? () => {} : updateSquare}/>
+//   
+//   setSquares from const[squares, setSquares] is the function you use to 
+//   tell your app to re-render (cook a new batch of your recipe), and it updates
+//   your app to re-render with the new squares in your Board component (aka 
+//   cook a new batch of your recipe with a variation)
+//
+//   hopefully this analogy helps someone out with understanding state in React!
+//   if i can remember to do it, i'd like to turn this into a medium article, which 
+//   will be easier to read.
 
 
 // SETTING UP FUNCTIONS AND VARIABLES 

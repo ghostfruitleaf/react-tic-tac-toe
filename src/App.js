@@ -2,8 +2,23 @@ import React, { useState } from 'react';
 import './App.css';
 import Board from './components/Board';
 
+// INTRO 
+// hello! i was informed that it would be helpful to walk through a solution 
+// for react tic tac toe, so i (pauline) have created this branch to walk 
+// though the solution we ended up submitting for this project!
+
+// THE REACT ANALOGY
+
+
+
+// if i recall, player 1 always started with 'x' and player 2 always started
+// with 'o'
 const PLAYER_1 = 'x';
 const PLAYER_2 = 'o';
+
+// 
+// so before i continue, i wanted to inject a food-related analo
+
 
 const generateSquares = () => {
   const squares = [];

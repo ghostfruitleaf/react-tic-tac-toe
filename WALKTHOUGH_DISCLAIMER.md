@@ -25,7 +25,7 @@ students to violate Ada's academic integrity policies, nor is it my intent to
 do so. 
 
 ## Disclaimer for Code Explained in the Walkthrough
-While there are areas of this code that we attempted to optimize this is NOT an
+While there are areas of this code that we attempted to optimize, this is NOT an
 optimal solution nor is it the only solution. 
 
 It is, however, a working solution that I hope alongside commentary I have added 
@@ -40,7 +40,7 @@ develop an independent solution that may even optimize some of the code in this
 current solution. 
 
 As one example, there are many opportunities where Javascript's
-`map()` and `concat()` functionalities could be utilized that weren't. 
+`map()` and `concat()` functionalities could have been utilized that weren't. 
 
 Another example is that this solution is not easily expandable to accommodate 
 scenarios such as multiple Tic-Tac-Toe boards, Tic-Tac-Toe boards larger than 

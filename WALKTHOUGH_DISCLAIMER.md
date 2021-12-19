@@ -45,7 +45,7 @@ As one example, there are many opportunities where Javascript's
 Another example is that this solution is not easily expandable to accommodate 
 scenarios such as multiple Tic-Tac-Toe boards, Tic-Tac-Toe boards larger than 
 3x3, or allowing a player to start as either 'x' or 'o' instead of only 'x', 
-as an example. 
+to name a few. 
 
 ## Navigation
 

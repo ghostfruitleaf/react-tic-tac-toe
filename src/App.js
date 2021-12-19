@@ -522,6 +522,9 @@ export default App;
 //
 // IF READING ON GITHUB:
 //
+// DISCLAIMER AND NAVIGATION: 
+// https://github.com/ghostfruitleaf/react-tic-tac-toe/blob/solution-walkthrough/WALKTHOUGH_DISCLAIMER.md
+//
 // GO HERE TO WALK THROUGH Board.js:
 // https://github.com/ghostfruitleaf/react-tic-tac-toe/blob/solution-walkthrough/src/components/Board.js
 //

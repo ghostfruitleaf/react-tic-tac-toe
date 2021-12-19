@@ -25,9 +25,9 @@ import Board from './components/Board'; // this will allow App to use the Board 
 // * think of rendering your app like cooking your dish. you may follow the 
 //   recipe to the tee, you may swap an ingredient or two, you may add some more 
 //   of an ingredient or take something out. but more or less it will 
-//   hopefully come out as the final fish.
+//   hopefully come out as the final dish.
 // 
-// * in react, this would be the same as re-rending your app to reflect the 
+// * in react, this would be the same as re-rendering your app to reflect the 
 //   app's current state. what the user sees on the screen as a result of the 
 //   app's state is equivalent to the "final dish"
 //

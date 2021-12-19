@@ -55,8 +55,101 @@ project (C14).
 I don't believe we were required to write additional tests, and they were 
 provided to us. We needed to change the following files: 
 
-* **Recommended to start here:** [src/App.js](https://github.com/ghostfruitleaf/react-tic-tac-toe/blob/solution-walkthrough/src/App.js)
-* [src/components/Board.js](https://github.com/ghostfruitleaf/react-tic-tac-toe/blob/solution-walkthrough/src/components/Board.js)
+* **Recommended to start here:** [src/App.js](https://github.com/ghostfruitleaf/react-tic-tac-toe/blob/solution-walkthrough/src/App.js), which controls the state of the entire app and to render a board, renders one of:
+* [src/components/Board.js](https://github.com/ghostfruitleaf/react-tic-tac-toe/blob/solution-walkthrough/src/components/Board.js), which, to render the squares of a board, renders many of:
 * [src/components/Square.js](https://github.com/ghostfruitleaf/react-tic-tac-toe/blob/solution-walkthrough/src/components/Square.js)
 
 As such, these contain the contents of this walkthough. Hopefully this helps!
+
+## The React/Recipe Analogy, but Actually Readable (and with a Postscript)
+This analogy is also found in [src/App.js](https://github.com/ghostfruitleaf/react-tic-tac-toe/blob/solution-walkthrough/src/App.js), but I'm including it 
+here for readability. This is what personally helped React state vs. props make
+sense for me -- I've expanded the analogy outside of making cookies (the original 
+analogy) to cooking in general.
+
+### And Now... That Analogy
+Think of your favorite recipe -- it has ingredients you have to put together to 
+make the dish, right? 
+
+In React, the app is your final dish.
+
+As such, the components are the ingredients (or, they are recipes for an 
+ingredient you need for the overall dish). 
+
+Just like each ingredient has its own variant (ex) using elbow pasta or 
+spiral pasta for a mac and cheese recipe), each component has their own 
+"props" (aka properties), whose values are stored in the app state. 
+
+Think of rendering your app like cooking your dish. You may follow the 
+recipe to the tee, you may swap an ingredient or two, you may add some more 
+of an ingredient or take something out. but more or less it will 
+hopefully come out as the final dish.
+
+In React, this would be the same as re-rendering your app to reflect the 
+app's current state. what the user sees on the screen as a result of the 
+app's state is equivalent to the "final dish"
+
+When you re-render in React, you are "re-cooking the dish," and that is 
+essentially what useState () is helping you control. 
+
+If you use an egg to make a cheese omelette, for instance, you can't use 
+that egg again to make a spinach omelette, because you already used it -- 
+so you still need to use an egg, but you have to grab a new egg for the
+spinach omelette. It might be a brown egg, a duck egg, or an animal-free
+egg substitute, but it will still be serve the purpose of the egg or 
+egg substitute in your omelette.
+
+Similarly, when you update React's app state, you have to re-render ALL the 
+components along with the information you updated. 
+
+So in the line: 
+ 
+```const [squares, setSquares] = useState(generateSquares());```
+
+`useState(generateSquares)` informs your app that the first time you render/
+cook your dish, the `squares` from `const [squares, setSquares]` will come 
+from the output of `generateSquares()`.
+
+In turn, `squares` will tell your App what "kind" of `squares` you will send 
+into your `Board` component: 
+
+```<Board squares={squares} onClickCallback={checkForWinner() ? () => {} : updateSquare}/>```
+
+`setSquares` from `const[squares, setSquares]` is the function you use to 
+tell your app to re-render (cook a new batch of your recipe), and it updates
+your app to re-render with the new squares in your Board component (aka 
+cook a new batch of your recipe with a variation). 
+
+This is why `setSquares` has to regenerate the ENTIRE `Board`, instead of just 
+needing to update the square that changed.
+
+### Postscript 
+Unfortunately since I refer to line numbers throughout the walkthrough, it is 
+a little hard to include this in the code files after I wrote it out, so I'd 
+like to note here that the recipe analogy was very useful in helping me 
+understand and communicate why we must try to manage state as much as possible 
+in App.js with this scenario (or the way I view it):  
+
+Imagine you have a very complicated recipe for dish A, which requires you to 
+make B, C, and D in order to make A. 
+
+However, to make B, you need a recipe for E and F. To make C, you need a recipe 
+for G and H. and for D, you need a recipe for Z. 
+
+Now, imagine that the recipes to make A, B, C, D, E, F, G, H, and Z are all in 
+completely separate locations around the internet (or your recipe card holder). 
+
+To me, if you don't have all of recipe A memorized, or you just send recipe A to 
+someone else asking them to make it, whoever's making this recipe is going to 
+have a hard time organizing all that information in one place, ESPECIALLY if 
+they're trying to calculate all the ingredients and amounts that they need, and 
+are trying to follow the recipe as they go (especially if subrecipes of a 
+recipe needs an ingredient that other subrecipes of subrecipes of a subrecipes
+need). 
+
+So personally speaking, I would find it much more convenient to be able to 
+see ALL the ingredients and amounts I need for A, B, C, D, E, F, G, H, AND Z in 
+one place ready to go to actually make the recipe. 
+
+Similarly, it is MUCH more convenient for App.js to manage the entire App state, 
+and let Components focus more on how they USE the values in the App state. 

@@ -444,25 +444,60 @@ const App = () => {
             that runs every time the <button> rendered below is clicked (hence,
             onClick). 
             
-            see line 411 for more details on the callback function used here. 
+            see line 411 for more details on the callback function used here.  
+        */}
+        <button onClick = {resetGame}>Reset Game</button>
+      </header>
+      <main>
 
-            ALSO, you'll see that Board looks for an onClickCallback -- this is 
+        {/* 
+            here is where we render the Board component, which we imported 
+            in line 3. 
+
+            since Board already does the work of rendering, all the Square
+            components, we don't need to import Square. 
+
+            Board has a prop(erty), "squares", that we want to set equal to the 
+            values of the "squares" variable we defined in line 141. this means 
+            that every time "squares" is updated by setSquares, the app 
+            re-renders and sends the new "squares" value to Board.
+
+            the app will also send a different function to be assigned to the
+            onClickCallback prop(erty) depending on the outcome of 
+            checkForWinner(). 
+
+            The code snippet below uses a SWITCH STATEMENT (see line 364):
+
+            onClickCallback = {checkForWinner() ? () => {} : updateSquare}
+
+            ^^^ what this is doing is: 
+            1) checks for the outcome of checkForWinner().
+
+            2) if checkForWinner() returns a TRUTHY value (in this case, 'x' or 
+            'o'), assign onClickCallback an empty function, or () => {}, which 
+            tells the app that when a Square is clicked, nothing will happen 
+            because the game is finished. 
+
+            3) if checkForWinner() returns a FALSY value (in this case, ''), we 
+            need a Square to use updateSquare() as defined in line 173 to 
+            update its current state and trigger the app to re-render to reflect
+            the change IF that Square is clicked. 
+
+            NOTE ON onClickCallback: 
+            you'll see that Board looks for an onClickCallback -- this is 
             because the function you assign onClickCallback to is passed to 
             Board, then from Board to Square also onClickCallback. A Square 
             component has a prop(erty) called onClickCallback that was defined 
             beforehand in the assignment that represents a function it fires  
-            when it is clicked. 
+            when it is clicked. so we didn't have a choice i don't think... 
 
             note that <button> is an existing HTML/JSX element, hence it already
             has an onClick property defined. Board is a React component, so 
             by convention its properties are known as props. even though it's 
             functionally the same thing, though i guess they're referred to as
             props to explicitly note that React components handle their 
-            properties different from HTML/JSX. 
+            properties different from HTML/JSX (?).            
         */}
-        <button onClick = {resetGame}>Reset Game</button>
-      </header>
-      <main>
         <Board squares={squares} onClickCallback={checkForWinner() ? () => {} : updateSquare}/> 
       </main>
     </div>
@@ -471,4 +506,6 @@ const App = () => {
 
 // PLEASE NEVER FORGET THIS PART AT THE END. THIS TELLS THE CODE THAT OTHER
 // FILES CAN USE THE CODE ABOVE, AS DEFINED IN LINE 129. 
+//
+// SOURCE: HAVE TOTALLY DONE IT BEFORE 
 export default App;

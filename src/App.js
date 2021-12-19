@@ -496,7 +496,12 @@ const App = () => {
             by convention its properties are known as props. even though it's 
             functionally the same thing, though i guess they're referred to as
             props to explicitly note that React components handle their 
-            properties different from HTML/JSX (?).            
+            properties different from HTML/JSX (?).     
+            
+            please visit src/components/Board.js to see what Board is doing OR
+            if you are viewing this on GitHub, follow this link: 
+
+            https://github.com/ghostfruitleaf/react-tic-tac-toe/blob/solution-walkthrough/src/components/Board.js
         */}
         <Board squares={squares} onClickCallback={checkForWinner() ? () => {} : updateSquare}/> 
       </main>
@@ -509,3 +514,20 @@ const App = () => {
 //
 // SOURCE: HAVE TOTALLY DONE IT BEFORE 
 export default App;
+
+// CONGRATS YOU HAVE MADE IT TO END OF App.js !!! there are two more files we 
+// were required to edit: src/components/Board.js and src/components/Square.js
+//
+// tests, i believe, were optional or already provided. 
+//
+// IF READING ON GITHUB:
+//
+// GO HERE TO WALK THROUGH Board.js:
+// https://github.com/ghostfruitleaf/react-tic-tac-toe/blob/solution-walkthrough/src/components/Board.js
+//
+// GO HERE TO WALK THOUGH Square.js
+// https://github.com/ghostfruitleaf/react-tic-tac-toe/blob/solution-walkthrough/src/components/Square.js
+//
+// please let me know if this helps! i am happy to do the same (albeit in a more
+// readable format) for Inspiration Board. 
+

@@ -65,7 +65,14 @@ As such, these contain the contents of this walkthough. Hopefully this helps!
 This analogy is also found in [src/App.js](https://github.com/ghostfruitleaf/react-tic-tac-toe/blob/solution-walkthrough/src/App.js), but I'm including it 
 here for readability. This is what personally helped React state vs. props make
 sense for me -- I've expanded the analogy outside of making cookies (the original 
-analogy) to cooking in general.
+analogy) to cooking in general. 
+
+So that this entire file isn't just a lot of text, I've also included an image of 
+some cookies I tried making a few years ago. 
+
+![Cookies I baked a few years ago that ended in miscalculated disaster, but looked cute before going into the oven](/walkthrough_cookie_image.jpeg)
+
+They looked fine until they went into the oven... but they did taste good. 
 
 ### And Now... That Analogy
 Think of your favorite recipe -- it has ingredients you have to put together to 
@@ -124,7 +131,7 @@ This is why `setSquares` has to regenerate the ENTIRE `Board`, instead of just
 needing to update the square that changed.
 
 ### Postscript 
-Unfortunately since I refer to line numbers throughout the walkthrough, it is 
+Unfortunately, since I refer to line numbers throughout the walkthrough, it is 
 a little hard to include this in the code files after I wrote it out, so I'd 
 like to note here that the recipe analogy was very useful in helping me 
 understand and communicate why we must try to manage state as much as possible 
@@ -149,7 +156,18 @@ need).
 
 So personally speaking, I would find it much more convenient to be able to 
 see ALL the ingredients and amounts I need for A, B, C, D, E, F, G, H, AND Z in 
-one place ready to go to actually make the recipe. 
+one place ready to go to actually make the recipe, so I don't have to worry
+about finding the ingredients everytime I start a subrecipe under
+A, B, C, or D, and can just focus on making the recipe instead of needing to 
+prepare for it.
 
-Similarly, it is MUCH more convenient for App.js to manage the entire App state, 
-and let Components focus more on how they USE the values in the App state. 
+[As an example, here is a recipe from the Great British Bake Off that is very 
+complicated](https://thegreatbritishbakeoff.co.uk/recipes/all/prue-leith-sable-breton/). Note that in the "Ingredients" column, it lists all the ingredients
+and amounts you need, but separates them by each subcomponent of the overall
+recipe, instead of solely putting the ingredients for a subcomponent on a 
+completely separate page. 
+
+Similarly, it is MUCH more convenient for App.js to manage the entire app state, 
+and let components focus more on how they USE the values in the app state. This 
+also makes it easier to add new components to your app that may need the same 
+state properties as another component. 

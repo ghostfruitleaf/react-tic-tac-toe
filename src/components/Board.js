@@ -1,6 +1,12 @@
+// again, EVERY React component needs this import statement. 
 import React from 'react';
 import './Board.css';
+// App will render Board, but Board will render Square, hence the code for 
+// a Square component is imported here. 
 import Square from './Square';
+// here, the project is importing prop(erty) types so that it can strictly define 
+// what the format/data type/object type of each Board component prop(erty)
+// should be. 
 import PropTypes from 'prop-types';
 
 
@@ -42,6 +48,7 @@ Board.propTypes = {
   onClickCallback: PropTypes.func.isRequired,
 };
 
+// NOTE: YOU NEED THIS LINE SO THAT src/App.js CAN IMPORT AND USE BOARD. 
 export default Board;
 
 // IF READING ON GITHUB:

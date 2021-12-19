@@ -1,4 +1,4 @@
-// again, EVERY React component needs this import statement. 
+// EVERY React component needs this import statement. 
 import React from 'react';
 import './Board.css';
 // App will render Board, but Board will render Square, hence the code for 

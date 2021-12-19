@@ -129,7 +129,8 @@ const generateSquares = () => {
 const App = () => {
   // the line below takes a variable, "squares", that represents the 3x3
   // grid of squares the Board component will use to check who has selected 
-  // what square. 
+  // what Square, as well as the information it will pass to the Square
+  // components it renders. 
   //
   // "setSquares" defines the function that will take the current
   // value of the squares variable and update the app's state. 
@@ -154,27 +155,106 @@ const App = () => {
   // to make this clearer
   const [currentSquare, setCurrentSquare] = useState(false); // false = X 
 
-  const updateSquare = (id) => {
-  
+  // this is the callback function -- that is to say, this is the function that 
+  // fires/runs after a Square rendered on Board component is clicked. 
+  // 
+  // the reason the function is defined here in App.js and not Board.js or 
+  // Square.js is because due to the useState defined above for the "squares"
+  // variable, App.js already has access to the state of "squares", meaning that 
+  // the function being defined here can take advantage of that instead of 
+  // needing to continually send the squares value to and back between 
+  // components. 
+  //
+  // PARAMETERS:
+  // id: the id of the square as defined by "squares," the variable that was 
+  // passed down to the Board component, which uses it to generate Square 
+  // components, each with a corresponding id. when a Square component is 
+  // clicked, it passes its id prop value to updateSquare. 
+  const updateSquare = (id) => { 
+    // deep copying (creating an entirely different object with the same values
+    // as the object you want to copy, versus just creating an object that acts 
+    // sort of like a container to the object you want to copy, think creating 
+    // a shortcut to a file or folder on your computer) in javascript is rather 
+    // tricky, and normally you would need to download a package to be able to 
+    // do so properly. 
+    //
+    // in this case, i notice that we created a newSquares variable, but we put
+    // the corresponding square objects from the old squares variable in instead
+    // of making an entirely new object. 
+    //
+    // we weren't too experienced with javascript when we did this project, so 
+    // we basically brute forced it. looking at this code, i THINK it's because
+    // squares is an array of an array of objects, so the reference React looks
+    // for in updateSquares to know it's a new object is whether the ARRAY 
+    // holding the array of objects is a different array from the current one. 
+    // so it's fine to push everything else inside squares into newSquares
+    //
+    // this will pretty much be the same as generateSquares() except for a few
+    // differences, which i will point out throughout the code.
+    //
+    // we are ALSO assuming that this function will only be called during a game
+    // and NEVER when a game has been finished.  
     let newSquares = []; 
 
+    // once again, we need to set each row up
     for (let row = 0; row < 3; row += 1) {
-      newSquares.push([]); // 
+      newSquares.push([]); 
+      
+      // however, the way we handle columns will be different
       for (let col = 0; col < 3; col += 1) {
+
+        // first we need to check if we're about to push in the object
+        // represent the square that was clicked
         if (id === squares[row][col].id) {
+
+          // if it has been clicked, we next need to check if there's already 
+          // an 'x' or 'o' in this square according to the 'squares' variable.
+          // since we're assuming this function is only called during an 
+          // unfinished game, we don't want to accidentally change an 'x' or
+          // 'o' that was already placed 
           if (!squares[row][col].value) {
+
+            // at this point, the value of the square is empty so we know we 
+            // can change the square, and we also established in line 156 that
+            // that 'x' corresponds to FALSE and 'o' corresponds to TRUE for 
+            // THIS particular solution. 
+            //
+            // so !currentSquare is NOT checking for 'x' or 'o' -- again, the
+            // choice of variable data type and variable here was not our best 
+            // call. rather, it is checking if currentSquare's value is FALSE,
+            // corresponding to 'x' (PLAYER_1), or if currentSquare's value is
+            // TRUE, corresponding to 'o' (PLAYER_2)
             if (!currentSquare) {
               squares[row][col].value = PLAYER_1; 
             } else { 
               squares[row][col].value = PLAYER_2; 
             }
+
+            // so THIS line here is why i realize treating 'x' and 'o' as 
+            // a boolean was actually not a good idea, because here, 
+            // !currentSquare is doing something entirely different.
+            //
+            // if currentSquare === true, !currentSquare === false, therefore
+            // setCurrentSquare will update the value of currentSquare to false.
+            //
+            // conversely, if currentSquare === false, !currentSquare === true, 
+            // so setCurrentSquare will update the value of currentSquare to 
+            // true. 
             setCurrentSquare(!currentSquare);
           }
         } 
+
+        // once we've checked that each square is in the desired state (has 'x'
+        // 'o', or '' where it needs to), we push it into newSquares in the 
+        // corresponding row
         newSquares[row].push(squares[row][col])
       }
     }
 
+
+    // at this point, we have put the new state of squares into newSquares to 
+    // be updated to by setSquares. please see line 174 onwards for the full 
+    // length explanation of why we needed newSquares to begin with. 
     setSquares(newSquares);
   }
 

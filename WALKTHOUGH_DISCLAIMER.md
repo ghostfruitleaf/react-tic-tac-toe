@@ -24,6 +24,14 @@ did NOT write this walkthough in an attempt to encourage or allow current Ada
 students to violate Ada's academic integrity policies, nor is it my intent to 
 do so. 
 
+That said, please feel free to use this resource<sup>1</sup> as part of a curriculum or 
+learning module. Just note that it's also subject to the open source MIT license
+that defines usage rights for the rest of the repo. 
+
+*<sup>1</sup> Resources include all content added by me (ghostfruitleaf@GitHub) 
+to this particular branch of the original repo, such as this file, comments I 
+added to the source code, and a picture of a batch of cookies.*
+
 ## Disclaimer for Code Explained in the Walkthrough
 While there are areas of this code that we attempted to optimize, this is NOT an
 optimal solution nor is it the only solution. 

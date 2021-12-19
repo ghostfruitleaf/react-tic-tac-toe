@@ -23,4 +23,18 @@ Square.propTypes = {
   id: PropTypes.number.isRequired,
 };
 
-export default Square
+export default Square;
+// ^ confession, i added the semicolon while writing this up... shh... 
+
+// IF READING ON GITHUB:
+//
+// GO HERE TO WALK THROUGH App.js:
+// https://github.com/ghostfruitleaf/react-tic-tac-toe/blob/solution-walkthrough/src/App.js
+//
+// GO HERE TO WALK THOUGH Board.js
+// https://github.com/ghostfruitleaf/react-tic-tac-toe/blob/solution-walkthrough/src/components/Board.js
+//
+// please let me know if this helps! i am happy to do the same (albeit in a more
+// readable format) for Inspiration Board. 
+
+

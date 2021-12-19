@@ -43,3 +43,14 @@ Board.propTypes = {
 };
 
 export default Board;
+
+// IF READING ON GITHUB:
+//
+// GO HERE TO WALK THROUGH App.js:
+// https://github.com/ghostfruitleaf/react-tic-tac-toe/blob/solution-walkthrough/src/App.js
+//
+// GO HERE TO WALK THOUGH Square.js
+// https://github.com/ghostfruitleaf/react-tic-tac-toe/blob/solution-walkthrough/src/components/Square.js
+//
+// please let me know if this helps! i am happy to do the same (albeit in a more
+// readable format) for Inspiration Board. 

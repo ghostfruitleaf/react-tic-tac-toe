@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; // you need this code so that React sees that this does React things
 import './App.css';
-import Board from './components/Board';
+import Board from './components/Board'; // this will allow App to use the Board component defined in src/components/Board.js
 
 // INTRO 
 // hello! i was informed that it would be helpful to walk through a solution 
@@ -20,7 +20,7 @@ import Board from './components/Board';
 //
 //   just like each ingredient has its own variant (ex. using elbow pasta or 
 //   spiral pasta for a mac and cheese recipe), each component has their own 
-//   "props", whose values are stored in the app state. 
+//   "props" (aka properties), whose values are stored in the app state. 
 //
 // * think of rendering your app like cooking your dish. you may follow the 
 //   recipe to the tee, you may swap an ingredient or two, you may add some more 
@@ -169,7 +169,7 @@ const App = () => {
   // id: the id of the square as defined by "squares," the variable that was 
   // passed down to the Board component, which uses it to generate Square 
   // components, each with a corresponding id. when a Square component is 
-  // clicked, it passes its id prop value to updateSquare. 
+  // clicked, it passes its id prop(erty) value to updateSquare. 
   const updateSquare = (id) => { 
     // deep copying (creating an entirely different object with the same values
     // as the object you want to copy, versus just creating an object that acts 
@@ -258,9 +258,33 @@ const App = () => {
     setSquares(newSquares);
   }
 
-
+  // checkForWinner is used to validate whether the game is finished or still
+  // in progress.
+  //
+  // if the game is still in progress, checkForWinner will return an empty 
+  // string, which is treated as a "falsy" value in javascript. 
+  //
+  // if the game is finished, checkForWinner also will check to see if PLAYER_1
+  // (x) won, returning 'x' PLAYER_2 (o) won, returning 'o' or if it's a tie,
+  // returning 'TIED'. all return values from checkForWinner will be strings. 
   const checkForWinner = () => {
 
+    // credit to Ansel (when he was a TA!!) for this idea. this is an array 
+    // of arrays. each subarray within WINNING_INDEX contains a set of three 
+    // 2-element arrays, each represent the row and column of a square to check.
+    // 
+    // if all squares corresponding to the row/col of each 2-element array in 
+    // a sub-array have the same value (all 'x' or all 'o'), this means that 
+    // a WINNING SET is found and the game is over, and someone has won. 
+    
+    // if checkForWinner checks against every subarray in WINNING_INDEX and does
+    // NOT find a WINNING SET:
+    //
+    // 1) the game is in progress (meaning that checkForWinner has found a 
+    // Square with an empty string for a value instead of 'x' or 'o')
+    //
+    // 2) the game is tied (all Square components have either an 'x' or 'o')
+    //
     const WINNING_INDEX = [
       [[0, 0], [0, 1], [0, 2]], 
       [[1, 0], [1, 1], [1, 2]],
@@ -272,36 +296,170 @@ const App = () => {
       [[0, 2], [1, 1], [2, 0]]
     ];
 
+    // we start by assuming that the board is finished unless proven otherwise,
+    // and we will use hasBlank to see if there is at least ONE empty square 
+    // in the event that no WINNING SETS are identified through WINNING index.
     let hasBlank = false; // if the square is blank or not
 
+    // as mentioned in the comment starting at line line 271, checkForWinner
+    // iterates through every subarray (winSet) of WINNING_INDEX
+    //
+    // note that WINNING_INDEX is a constant and will ALWAYS have the same 
+    // number of elements. as such, this solution is in fact an O(1) solution.
+    // however, using WINNING_INDEX means it is more difficult to expand this 
+    // solution to, say, a 4x4 tic tac toe board since solutions will have to be
+    // manually added to WINNING_INDEX with the way this code is written. 
     for (const winSet of WINNING_INDEX) {
       
+      // to track all the values in a winSet and the corresponding squares, 
+      // an empty array was generated to track the values obtained from 
+      // each square associated with a winSet
       const currentRow = []
+
+      // now, check through every Square associated with each winPos of the
+      // current winSet
       for (const winPos of winSet) {
+
+        // where x = row, and y = column of the Square to look for
         const [x, y] = winPos;
+
+        // first check to see if the value of the corresponding Square is 
+        // an empty string. this means that if the code exits both for loops, 
+        // the game is still in progress. 
+        // 
+        // so long as there is ONE square without an 'x' or 'o' the above 
+        // statement applies. as such, we only need to check for a blank square 
+        // once. we thought this code did that, but reading through i realize
+        // it actually does not, and should have been optimized to:
+        //
+        // if(!squares[x][y].value && !hasBlank){
+        //
+        // which would prevent the code from entering this if block EVERY single
+        // time it found a Square without an 'x' or 'o'
         if(!squares[x][y].value){
           hasBlank = true; // we don't need to check for blank after since we check it here already
         }
+
+        // after the above check, current Row will receive either an 'x', 'o',
+        // or empty string based on the value prop(erty) value in the 
+        // corresponding Square. 
         currentRow.push(squares[x][y].value);  
       }
+
+      // the moment we find a winSet where the corresponding Squares all have
+      // 'x' or 'o', the game is OVER and someone has won, so we wouldn't
+      // need to check any remaining winSet rows that follow.
+      // 
+      // note that the if block first checks for currentRow[0], since if 
+      // currentRow[0] returns false, it's an empty string -- 'x' or 'o' 
+      // would return a truthy value. 
+      // THEN it checks that all other values in currentRow match the first, 
+      // which would prevent the code from entering the if-block if any other
+      // elements of currentRow was an empty string
+      //
+      // if BOTH of the above conditions pass, the function returns 'x' or
+      // 'o' (depending on which character is in currentRow) and exits. 
       if(currentRow[0] && (currentRow[0] === currentRow[1] && currentRow[1] === currentRow[2] && currentRow[0])){ // ['x', 'o', 'x']
+
+        // ABOUT NON-PYTHON SWITCH STATEMENTS 
+        // 
+        // a switch statement is essentially an abbreviated way to write 
+        // an if-else statement. this is often used to keep code short, and in
+        // the olden days, make the code run /slightly/ faster. 
+        //
+        // (back in the day memory was NOT cheap, so EVERY byte was precious. 
+        // every character of code you typed was a byte of memory being 
+        // processed, so it was important to not only make code easy to 
+        // understand for humans, but also give machines running it as little 
+        // work to do so as possible.)
+        //
+        // python does NOT have a switch statement capability the way that many 
+        // other languages, including javascript. this was only briefly 
+        // covered in c14's curriculum for ruby, which DOES have switch 
+        // statements, so i'll overview what the code below is doing here: 
+        //
+        // IF (currentRow[0] === 'x'){ return 'x';} ELSE { return 'o'; }; 
+        //
+        // or, formatted: 
+        //
+        // if (currentRow[0] === 'x') {
+        //  return 'x';
+        // } else {
+        //  return 'o';
+        // }
+        //
+        // essentially, the '?' marks the end of the if statement you want to 
+        // check, the ':' marks what should happen if the if statement is 
+        // false.
         return currentRow[0] === 'x' ? 'x' : 'o';
       }
     }
 
+    // if the code reaches this return statement, the game is either in progress
+    // or tied. if hasBlank is true, at least one Square doesn't have an 'x' or
+    // 'o' and the game is not finished yet, hence it returns an empty string. 
+    // 
+    // if hasBlank is false, all Squares have an 'x' or 'o' and the game is 
+    // finished with a tie, hence returning 'TIED'
+    //
+    // please see line 364 for an in-depth explanation on the line's syntax
+    // (aka it's using a "switch statement")
     return hasBlank ? '' : 'TIED';
 
   }
 
+  // resetGame, when called, uses setSquares to update the state of the squares
+  // variable to its initial state, so NO Square has an 'x' or an 'o' just like 
+  // useState(generateSquares()) does to set the inital state of the squares
+  // variable in line 141. 
+  // 
+  // resetGame is fired every time a user clicks the <button> element in the 
+  // return value, hence it is assigned to onClick, as shown below: 
+  //
+  // <button onClick = {resetGame}>Reset Game</button>
+  //
+  // to review, {resetGame} is put in curly brackets to indicate this is 
+  // javascript code to run and NOT JSX/HTML to render. 
   const resetGame = () => {
     setSquares(generateSquares());
   }
 
+  // the return statement below now renders what the user will see.
+  // className tells App.js to look for the corresponding property
+  // in src/App.css
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
+        {/* 
+            in the curly brackets below, a string will always be returned, 
+            since checkForWinner() will also always return a string. 
+            
+            see line 261 for more details. 
+        */}
         <h2>Winner is {!checkForWinner() ? 'IN-PROGRESS' : checkForWinner()}</h2>
+        
+        {/* 
+            the onClick property in <button> can be assigned a callback function
+            that runs every time the <button> rendered below is clicked (hence,
+            onClick). 
+            
+            see line 411 for more details on the callback function used here. 
+
+            ALSO, you'll see that Board looks for an onClickCallback -- this is 
+            because the function you assign onClickCallback to is passed to 
+            Board, then from Board to Square also onClickCallback. A Square 
+            component has a prop(erty) called onClickCallback that was defined 
+            beforehand in the assignment that represents a function it fires  
+            when it is clicked. 
+
+            note that <button> is an existing HTML/JSX element, hence it already
+            has an onClick property defined. Board is a React component, so 
+            by convention its properties are known as props. even though it's 
+            functionally the same thing, though i guess they're referred to as
+            props to explicitly note that React components handle their 
+            properties different from HTML/JSX. 
+        */}
         <button onClick = {resetGame}>Reset Game</button>
       </header>
       <main>
@@ -311,4 +469,6 @@ const App = () => {
   );
 }
 
+// PLEASE NEVER FORGET THIS PART AT THE END. THIS TELLS THE CODE THAT OTHER
+// FILES CAN USE THE CODE ABOVE, AS DEFINED IN LINE 129. 
 export default App;
